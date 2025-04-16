@@ -1,11 +1,9 @@
 {
   "name": "react",
   "version": "1.0.0",
+  "homepage": "https://vedant44-cyber.github.io",
   "description": "",
   "keywords": [],
-
-  "homepage": "https://vedant44-cyber.github.io",
-
   "main": "src/index.tsx",
   "dependencies": {
     "@emotion/react": "11.14.0",
