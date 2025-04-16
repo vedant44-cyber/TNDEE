@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import ParticlesComponent from "./components/particles";
 
 const Credits = () => (
-  <div classname="credits">
+  <div className="credits">
     <ParticlesComponent id="particles" />
     <Typography variant="h3" id="welcome_heading" className="names">
       Vishnupriya 107123135
