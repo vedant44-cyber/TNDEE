@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Slider, Typography, Box } from "@mui/material";
+import { Slider, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import { calculateTND } from "./components/calc";
 import { VoltageChart } from "./components/VoltageCharts";
 import "./styles.css";
@@ -47,7 +47,7 @@ export default function Calculate() {
 
       <Box className="slider-section">
         <Box className="inputs">
-          <Typography gutterBottom>Voltage: {voltage} kV</Typography>
+          <Typography gutterBottom sx={{ mt: 2, fontSize:"20" }}>Voltage: {voltage} kV</Typography>
           <Slider
             value={voltage}
             onChange={(e, val) => setVoltage(val)}
@@ -63,7 +63,7 @@ export default function Calculate() {
             }}
           />
 
-          <Typography gutterBottom>
+          <Typography gutterBottom sx={{ mt: 2, fontSize:"20" }}>
             Sheath Diameter: {sheathDiameter} cm
           </Typography>
           <Slider
@@ -81,7 +81,7 @@ export default function Calculate() {
             }}
           />
 
-          <Typography gutterBottom>Core Diameter: {coreDiameter} cm</Typography>
+          <Typography gutterBottom sx={{ mt: 2, fontSize:"20" }}>Core Diameter: {coreDiameter} cm</Typography>
           <Slider
             value={coreDiameter}
             onChange={(e, val) => setCoreDiameter(val)}
@@ -97,7 +97,7 @@ export default function Calculate() {
             }}
           />
 
-          <Typography gutterBottom>Number of Inner Sheaths: {count}</Typography>
+          <Typography gutterBottom sx={{ mt: 2, fontSize:"20" }}>Number of Inner Sheaths: {count}</Typography>
           <Slider
             value={count}
             onChange={(e, val) => setCount(val)}
@@ -119,43 +119,33 @@ export default function Calculate() {
             Results
           </Typography>
 
-          <Typography variant="body1">
-            <strong>Alpha:</strong> {alpha.toFixed(3)}
-          </Typography>
+          
+          <TableContainer component={Paper} >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center" >Inter-sheath </TableCell>
+                  <TableCell align="center" >Diameter (cm)</TableCell>
+                  <TableCell align="center" >Voltage (kV)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {radii.map((radius, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="center" sx={{ mt: 2, fontSize:"20" }}>{index + 1}</TableCell>
+                    <TableCell align="center"sx={{ mt: 2, fontSize:"20" }}>{(radius * 200).toFixed(2)}</TableCell>
+                    <TableCell align="center"sx={{ mt: 2, fontSize:"20" }}>{(voltages[count-index-1] / 1000).toFixed(2)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-          <Typography variant="body1" gutterBottom sx={{ mt: 2 }}>
-            <strong>Diameter</strong>
-          </Typography>
-          <ul>
-            {radii.map((val, i) => (
-              <li key={i}>
-                d{i}: {(val * 200).toFixed(4)} cm
-              </li>
-            ))}
-          </ul>
-
-          <Typography variant="body1" gutterBottom sx={{ mt: 2 }}>
-            <strong>Voltages:</strong>
-          </Typography>
-          <ul>
-            {voltages.map((v, i) => {
-              if (i % 2 !== 0) return null;
-              return (
-                <li key={i}>
-                  V{i + 1}: {voltages[i].toFixed(2)} V, V{i + 2}:{" "}
-                  {voltages[i + 1]?.toFixed(2)} V
-                </li>
-              );
-            })}
-          </ul>
-
-          <Typography variant="body1" sx={{ mt: 2 }}>
-            <strong>Max Potential Gradient without inner sheath:</strong>{" "}
-            {(gMaxWithout/1000)} kV/m
+          <Typography variant="body1" sx={{ mt: 2  }}>
+            Potential Gradient at Core Surface (with inter-sheaths): {(gMaxWith/100000).toFixed(2)} kV/cm
           </Typography>
           <Typography variant="body1" sx={{ mt: 2 }}>
-            <strong>Max Potential Gradient with inner sheath:</strong>{" "}
-            {(gMaxWith/1000 )} kV/m
+            Potential Gradient (without inter-sheaths): {(gMaxWithout/100000).toFixed(2)} kV/cm
           </Typography>
         </Box>
       </Box>

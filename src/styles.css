@@ -47,7 +47,8 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
-  width: 750px;
+  width: 40%;
+  height: 70%;
   gap: 2rem;
   padding: 2rem;
   border-radius: 12px;
@@ -59,8 +60,9 @@
   z-index: 10;
   background-color: #023047;
   border-radius: 12px;
+  height: 70%;
   padding: 2rem;
-  max-width: 750px;
+  max-width: 40%;
   /* remove this is space remains in the inputs area */
   box-shadow: 0 4px 12px #023e8a;
 }
@@ -163,4 +165,22 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+.results table {
+  width: 100%;
+  background-color: #023047;
+  box-shadow: 0 4px 12px #023e8a;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration-color: #ffb703;
+  border-radius: 10px;
+  
+  color: #ffb703;
+  border: 2px solid #ffb703;;
+}
+
+
+.results table td,
+.results table th {
+  color: #ffb703;
+  border: 1px solid #ffb703;;
 }

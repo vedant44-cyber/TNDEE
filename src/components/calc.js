@@ -9,15 +9,26 @@ export function calculateTND(Vnom, Dsheath, Dcore, n) {
     radii.push(r * Math.pow(alpha, i));
   }
 
+ function solveVoltages(alpha, n, Vnom) {
   const voltages = [];
-  const logRatio = Math.log(R / r);
+  let currentVoltage = Vnom;
 
-  for (let i = 1; i <= n; i++) {
-    const Vi = (Vnom * Math.log(radii[i] / r)) / logRatio;
-    voltages.push(Vi);
+  for (let k = n; k >= 1; k--) {
+    const nextVoltage = ((Math.pow(alpha, k + 1) - alpha) / (Math.pow(alpha, k + 1) - 1)) * currentVoltage;
+    voltages.unshift(nextVoltage);  
+    currentVoltage = nextVoltage;
   }
 
-  const gMaxWith = (Vnom - voltages[0]) / (r * Math.log(alpha));
+   return voltages;
+   
+ }
+  
+ const voltages = solveVoltages(alpha, n, Vnom);
+for (let i = 0; i < n; i++) { console.log("Voltage " + i + ": " + voltages[i]); }
+
+    const gMaxWith = ((alpha - 1) * Vnom) / ((Math.pow(alpha, n + 1) - 1) * (r * Math.log(alpha)));
+
+
   const gMaxWithout = Vnom / (r * Math.log(R / r));
 
   return {
