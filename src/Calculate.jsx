@@ -10,7 +10,7 @@ export default function Calculate() {
   const [sheathDiameter, setSheathDiameter] = useState(20);
   const [coreDiameter, setCoreDiameter] = useState(10);
   const [count, setCount] = useState(3);
-
+  const [error, setError] = useState(false);  
   const { alpha, radii, voltages, gMaxWithout, gMaxWith } = calculateTND(
     voltage * 1000,
     sheathDiameter / 100,
@@ -68,7 +68,15 @@ export default function Calculate() {
           </Typography>
           <Slider
             value={sheathDiameter}
-            onChange={(e, val) => setSheathDiameter(val)}
+            onChange={(e, val) => {
+              if (val > coreDiameter) {
+                setError(false);
+                setSheathDiameter(val);
+              } else {
+                setError(true);
+              }
+            }}
+    
             step={0.5}
             marks={marksCable}
             min={0}
@@ -84,7 +92,14 @@ export default function Calculate() {
           <Typography gutterBottom sx={{ mt: 2, fontSize:"20" }}>Core Diameter: {coreDiameter} cm</Typography>
           <Slider
             value={coreDiameter}
-            onChange={(e, val) => setCoreDiameter(val)}
+            onChange={(e, val) => {
+    if (val < sheathDiameter) {
+      setError(false);
+      setCoreDiameter(val);
+    } else {
+      setError(true);
+    }
+  }}
             step={0.5}
             marks={marksCable}
             min={0}
@@ -96,7 +111,16 @@ export default function Calculate() {
               },
             }}
           />
+          {error && (
+            <Typography 
+              color="error"   
+              sx={{ mt: 1 ,color: "#ffb703",fontSize:"15" }}
+            >
+            Sheath Diameter must be greater than Core Diameter
+            </Typography>
+          )}
 
+          
           <Typography gutterBottom sx={{ mt: 2, fontSize:"20" }}>Number of Inner Sheaths: {count}</Typography>
           <Slider
             value={count}
