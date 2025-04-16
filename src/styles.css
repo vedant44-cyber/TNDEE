@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Mukta:wght@200;300;400;500;600;700;800&family=Silkscreen:wght@400;700&family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
+
+.App {
+  color: #ffb703;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.slider-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4rem;
+  margin-top: 2rem;
+  z-index: 11;
+}
+
+.animated-slider {
+  width: 300px;
+  color: #fb8500;
+  transition: all 0.3s ease;
+}
+
+.animated-slider .MuiSlider-thumb {
+  background-color: #fb8500;
+  transition: transform 0.2s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.animated-slider .MuiSlider-track {
+  background-color: #fb8500;
+}
+
+.animated-slider .MuiSlider-rail {
+  background-color: #ffb703;
+}
+
+.inputs {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 750px;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #023047;
+  box-shadow: 0 4px 12px #023e8a;
+}
+
+.results {
+  z-index: 10;
+  background-color: #023047;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 750px;
+  /* remove this is space remains in the inputs area */
+  box-shadow: 0 4px 12px #023e8a;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  font-family: "Lexend Deca", sans-serif;
+  padding: 1rem 0;
+  z-index: 11;
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #e5e5e5;
+  font-size: 18px;
+  margin: 0 20px;
+  padding-bottom: 5px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.nav-link:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+
+.welcome {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+#welcome_heading {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  z-index: 10;
+}
+
+#particles canvas {
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.first {
+  font-size: 100px;
+  font-family: monospace;
+  font-weight: 100;
+}
+
+.second {
+  font-family: monospace;
+  font-size: 90px;
+  opacity: 0.5;
+}
+
+.third {
+  font-family: monospace;
+  font-size: 70px;
+  opacity: 0.34;
+}
+
+.names {
+  display: flex;
+  z-index: 10;
+  position: relative;
+  flex-direction: column;
+}
+.credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
